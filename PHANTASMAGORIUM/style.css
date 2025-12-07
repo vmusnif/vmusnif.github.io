@@ -76,12 +76,12 @@ section {
 	max-width: fit-content;
     min-width: fit-content;
 	z-index: 998;
-	background-color: #333;
+	background-color: #073B3A;
 	padding: 10px 15px;
 	border-radius: 10px;
 	box-shadow: 2px 2px 1px rgba(0,0,0,50%);
 	font-weight: bolder;
-	color: white;
+	color: #80cfa9;
 	opacity: 5%;
 	transition: all 0.2s ease-in-out;
 }
@@ -94,7 +94,7 @@ section {
 	/* Inner Box */
 	.bgm > div {
 		background-color: black;
-		border: solid white;
+		border: solid #80cfa9;
 		padding: 5px 7px;
 		border-radius: 5px;
 	}
@@ -110,6 +110,7 @@ section {
 		width: 300px;
 		margin: 5px 0 10px 0;
 		background-color: black;
+		color: #a7e2e3;
 		font-size: 14px;
 	}
 	.bgm .now-playing #bgm-text {
@@ -127,7 +128,7 @@ section {
 		transition: 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 		text-align: center;
 		font-size: 14px;
-		font-family: MNC;
+		font-family: monospace;
 		border: 3px solid black;
 		border-radius: 5px;
 		box-shadow: 2px 2px 1px rgba(0,0,0,50%);
@@ -281,12 +282,14 @@ footer > span {
 .navbar a#logo {
 	border: none;	
 	float: left;
-	margin: 0;
+	padding: 0;
 	box-shadow: none;
+	height: 55px;
+	margin: 0;
 }
 .navbar a#logo img {
-	height: 22px;
-	margin: 5px 10px;
+	height: 50px;
+	padding: 2.5px 5px;
 }
 
 /* Breadcrumb */
@@ -309,8 +312,8 @@ footer > span {
 	text-decoration: none;
 }
 .bcrumb a:hover {
-	color: #282454;
-	background-color: white;
+	color: #073B3A;
+	background-color: #a7e2e3;
 	font-size: 14pt;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -351,8 +354,8 @@ footer > span {
 }
 .grid > a:hover,
 .grid > a:active {
-	border-color: #80cfa9;
-	color: #80cfa9;
+	border-color: #a7e2e3;
+	color: #a7e2e3;
 	transform: rotateX(14deg) rotateY(15deg) rotateZ(12deg);
 }
 .grid > a > * {
