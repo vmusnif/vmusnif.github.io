@@ -14,9 +14,9 @@ html {
 }
 body {
 	background-color: black;
-	background-image: url("media/images/opal.gif");
+	background-image: url("media/images/STAR.png");
 	background-repeat: repeat;
-	background-size: 10%;
+	background-size: 25%;
 	background-position: center -34.75em;
 	font-family: monospace;
 	color: white;
@@ -30,6 +30,15 @@ body {
 	padding: 0;
 	display: flex;
 	flex-flow: column;
+	animation: scrollBackground 10s linear infinite;
+}
+@keyframes scrollBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: -100% 100%;
+	}
 }
 * {
 	box-sizing: border-box;
