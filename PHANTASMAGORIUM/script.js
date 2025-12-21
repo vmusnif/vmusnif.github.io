@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgmAudio = document.getElementById('bgm-audio');
   const nextBtn = document.getElementById('next-btn');
   const prevBtn = document.getElementById('prev-btn');
+  const autoBtn = document.getElementById('auto-btn');
   
   // Script Path
   const SCRIPT_PATH = (() => {
@@ -91,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const filename = fullPath.substring(fullPath.lastIndexOf("/") + 1);
     bgmText.textContent = "NOW PLAYING: " + (titles[filename] || "Unknown Track");
   }
-
   // Next Track
   nextBtn.addEventListener('click', () => {
     loadTrack(index + 1);
@@ -101,6 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
   prevBtn.addEventListener('click', () => {
     loadTrack(index - 1);
     bgmAudio.play().catch(() => {});
+  });
+  // Audio Autoplay Toggle
+  autoBtn.addEventListener('click', () => {
+    if (bgmAudio.autoplay) {
+      bgmAudio.autoplay = false;
+      autoBtn.textContent = 'Autoplay: OFF';
+    } else {
+      bgmAudio.autoplay = true;
+      autoBtn.textContent = 'Autoplay: ON';
+    }
   });
   // Paused Text Updater
   bgmAudio.addEventListener('play', updateText);
@@ -193,6 +203,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const storedIndex = parseInt(sessionStorage.getItem("bgm-index"), 10);
   const playing = sessionStorage.getItem("bgm-playing") === "true";
   const userPlayed = sessionStorage.getItem("bgm-user-played") === "true";
+  const autoPlaySetting = sessionStorage.getItem("bgm-autoplay") === "true";
+
+  // Autoplay Setting Restorer
+  audio.autoplay = autoPlaySetting;
 
   // Position Restorer
   if (left) box.style.left = left;
@@ -232,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sessionStorage.setItem("bgm-index", index);
     sessionStorage.setItem("bgm-playing", (!audio.paused).toString());
     sessionStorage.setItem("bgm-user-played", (audio.dataset.userPlayed === "true").toString());
+    sessionStorage.setItem("bgm-autoplay", audio.autoplay.toString());
   };
 
   // Periodic State Save + Unload Handling
