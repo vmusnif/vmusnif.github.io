@@ -386,6 +386,7 @@ footer > span {
 article {
 	text-align: left;
 	font-size: 14pt;
+	min-width: 100%;
 	max-width: 100%;
 	position: relative;
 }
@@ -394,6 +395,7 @@ article > div {
 	align-items: flex-start;
 	gap: 20px;
 	margin: 0 150px;
+	width: 100%;
 }
 article {
 	p {
@@ -420,8 +422,7 @@ article {
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
-}
-article 
+} 
 
 /* Collapsible */
 .collapsible {
@@ -476,6 +477,7 @@ article
 }
 .notaside {
 	flex: 1;
+	max-width: calc(100vw - 700px - 20px);
 }
 
 /* Aside */

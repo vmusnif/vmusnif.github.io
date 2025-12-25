@@ -1,29 +1,23 @@
 ///////////////////////////////////////////////////////
 // Global BGM Namespace (Playlist, Titles, Paths, Index)
 
-  // Script Path
-  const SCRIPT_PATH = (() => {
+  // Resolve script URL robustly and build absolute playlist URLs
+  const { playlist, titles, index: __initialIndex } = (() => {
     const scripts = document.getElementsByTagName("script");
-    const current = scripts[scripts.length - 1];
-    const src = current.src;
-    return src.substring(0, src.lastIndexOf('/') + 1);
+    // FIND: script element
+    let current = Array.from(scripts).reverse().find(s => s.src && s.src.includes("script.js")) || scripts[scripts.length - 1];
+    const scriptUrl = current && current.src ? new URL(current.src, location.href) : new URL('./', location.href);
+    const files = ["phantasmagoria.mp3", "WINTERWATER.mp3"];
+    const pl = files.map(f => new URL(`media/audio/${f}`, scriptUrl.href).href);
+    const t = {
+      "phantasmagoria.mp3": "phantasmagoria - VMN",
+      "WINTERWATER.mp3": "WINTERWATER - VMN"
+    };
+    return { playlist: pl, titles: t, index: 0 };
   })();
 
-  // Playlist
-  const playlist = [
-    "phantasmagoria.mp3",
-    "WINTERWATER.mp3"
-  ].map(file => SCRIPT_PATH + "media/audio/" + file);
-
-  // Titles
-  const titles = {
-    "phantasmagoria.mp3": "phantasmagoria - VMN",
-    "WINTERWATER.mp3": "WINTERWATER - VMN"
-  };
-
   // Shared Index
-  let index = 0;
-
+  let index = __initialIndex;
 
 ///////////////////////////////////////////////////////
 // Collapsible Content
@@ -117,11 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
   bgmAudio.addEventListener('pause', () => {
     bgmText.textContent = 'Paused.';
   });
-  // Auto Next Track
-  bgmAudio.addEventListener('ended', () => {
-    loadTrack(index + 1);
-    bgmAudio.play().catch(() => {});
-  });
+  // Autoplay Button Text Updater
+  if (bgmAudio.autoplay) {
+      bgmAudio.autoplay = false;
+      autoBtn.textContent = 'Autoplay: OFF';
+    } else {
+      bgmAudio.autoplay = true;
+      autoBtn.textContent = 'Autoplay: ON';
+    }
 
   // Load first track initially
   loadTrack(index);
